@@ -14,7 +14,7 @@ public interface SpecialDao {
     List<Special> getAll();
 
     //update
-    void update(String name, int year, int comicId, String country, String language, String description);
+    void update(int id, String name, int year, int comicId, String country, String language, String description);
 
     //delete
     void deleteById(int id);

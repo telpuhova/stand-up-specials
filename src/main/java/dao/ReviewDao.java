@@ -13,7 +13,7 @@ public interface ReviewDao {
     List<Review> getAll();
 
     //update
-    void update(String title, int rating, String content, String userName, int specialId);
+    void update(int id, String title, int rating, String content, String userName, int specialId);
 
     //delete
     void deleteById(int id);

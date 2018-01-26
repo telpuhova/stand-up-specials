@@ -14,7 +14,7 @@ public interface ComedianDao {
     List<Comedian> getAll();
 
     //update
-    void update(String name);
+    void update(int id, String name);
 
     //delete
     void deleteById(int id);
