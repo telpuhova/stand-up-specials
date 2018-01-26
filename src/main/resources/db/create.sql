@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS specials (
     description VARCHAR
 );
 
-CREATE TABLE IF NOT EXISTS comics (
+CREATE TABLE IF NOT EXISTS comedians (
     id int PRIMARY KEY auto_increment,
     name VARCHAR,
     dateOfBirth VARCHAR
