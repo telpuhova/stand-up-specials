@@ -16,6 +16,7 @@ public class Sql2oComedianDao implements ComedianDao{
     }
 
     //create
+    @Override
     public void add(Comedian comedian) {
         String sql = "INSERT INTO comedians (name, dateOfBirth) VALUES (:name, :dateOfBirth)";
         try (Connection con = sql2o.open()) {
@@ -30,6 +31,7 @@ public class Sql2oComedianDao implements ComedianDao{
     }
 
     //read
+    @Override
     public Comedian findById(int id) {
         String sql = "SELECT * FROM comedians WHERE id = :id";
         try (Connection con = sql2o.open()) {
@@ -38,6 +40,8 @@ public class Sql2oComedianDao implements ComedianDao{
                     .executeAndFetchFirst(Comedian.class);
         }
     }
+
+    @Override
     public List<Comedian> getAll() {
         String sql = "SELECT * FROM comedians";
         try (Connection con = sql2o.open()) {
@@ -47,6 +51,7 @@ public class Sql2oComedianDao implements ComedianDao{
     }
 
     //update
+    @Override
     public void update(int id, String name) {
         String sql = "UPDATE comedians SET name = :name WHERE id = :id";
         try (Connection con = sql2o.open()) {
@@ -60,6 +65,7 @@ public class Sql2oComedianDao implements ComedianDao{
     }
 
     //delete
+    @Override
     public void deleteById(int id) {
         String sql = "DELETE FROM comedians WHERE id = :id";
         try (Connection con = sql2o.open()) {
@@ -70,6 +76,8 @@ public class Sql2oComedianDao implements ComedianDao{
             System.out.println(ex);
         }
     }
+
+    @Override
     public void deleteAll() {
         String sql = "DELETE FROM comedians";
         try (Connection con = sql2o.open()) {

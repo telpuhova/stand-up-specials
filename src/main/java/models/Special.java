@@ -15,10 +15,15 @@ public class Special {
         this.name = name;
     }
 
-    public Special(String name, int year, int comicId, String country, String language, String description) {
+    public Special(String name, int comedianId) {
+        this.name = name;
+        this.comedianId = comedianId;
+    }
+
+    public Special(String name, int year, int comedianId, String country, String language, String description) {
         this.name = name;
         this.year = year;
-        this.comedianId = comicId;
+        this.comedianId = comedianId;
         this.country = country;
         this.language = language;
         this.description = description;
@@ -48,12 +53,12 @@ public class Special {
         this.year = year;
     }
 
-    public int getComicId() {
+    public int getComedianId() {
         return comedianId;
     }
 
-    public void setComicId(int comicId) {
-        this.comedianId = comicId;
+    public void setComedianId(int comedianId) {
+        this.comedianId = comedianId;
     }
 
     public String getCountry() {

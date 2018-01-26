@@ -16,6 +16,7 @@ public class Sql2oReviewDao implements ReviewDao {
     }
 
     //create
+    @Override
     public void add(Review review) {
         String sql = "INSERT INTO reviews (title, rating, content, userName, specialId) VALUES (:title, :rating, :content, :userName, :specialId)";
         try (Connection con = sql2o.open()) {
@@ -30,6 +31,7 @@ public class Sql2oReviewDao implements ReviewDao {
     }
 
     //read
+    @Override
     public Review findById(int id) {
         String sql = "SELECT * FROM reviews WHERE id = :id";
         try (Connection con = sql2o.open()) {
@@ -38,6 +40,7 @@ public class Sql2oReviewDao implements ReviewDao {
                     .executeAndFetchFirst(Review.class);
         }
     }
+    @Override
     public List<Review> getAll() {
         String sql = "SELECT * FROM reviews";
         try (Connection con = sql2o.open()) {
@@ -46,7 +49,17 @@ public class Sql2oReviewDao implements ReviewDao {
         }
     }
 
+    public List<Review> findBySpecial(int specialId){
+        String sql = "SELECT * FROM reviews WHERE specialId = :specialId";
+        try (Connection con = sql2o.open()) {
+            return con.createQuery(sql)
+                    .addParameter("specialId", specialId)
+                    .executeAndFetch(Review.class);
+        }
+    }
+
     //update
+    @Override
     public void update(int id, String title, int rating, String content, String userName, int specialId) {
         String sql = "UPDATE reviews SET title = :title, rating = :rating, content = :content, userName = :userName, specialId = :specialId WHERE id = :id";
         try (Connection con = sql2o.open()) {
@@ -64,6 +77,7 @@ public class Sql2oReviewDao implements ReviewDao {
     }
 
     //delete
+    @Override
     public void deleteById(int id) {
         String sql = "DELETE FROM reviews WHERE id = :id";
         try (Connection con = sql2o.open()) {
@@ -74,6 +88,8 @@ public class Sql2oReviewDao implements ReviewDao {
             System.out.println(ex);
         }
     }
+
+    @Override
     public void deleteAll() {
         String sql = "DELETE FROM reviews";
         try (Connection con = sql2o.open()) {

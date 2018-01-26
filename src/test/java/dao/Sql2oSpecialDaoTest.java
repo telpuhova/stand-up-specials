@@ -1,5 +1,6 @@
 package dao;
 
+import models.Comedian;
 import models.Special;
 import org.junit.After;
 import org.junit.Before;
@@ -78,7 +79,7 @@ public class Sql2oSpecialDaoTest {
 
     @Test
     public void deleteAll() {
-        Special special = new Special("Doug Stanhope");
+        Special special = new Special("You're all diseased");
         specialDao.add(special);
         Special special2 = new Special("If I");
         specialDao.add(special2);
@@ -86,5 +87,16 @@ public class Sql2oSpecialDaoTest {
         specialDao.add(special3);
         specialDao.deleteAll();
         assertEquals(0, specialDao.getAll().size());
+    }
+
+    @Test
+    public void findByComedian() {
+        Comedian comedian = new Comedian("Doug Stanhope");
+        Special special = new Special("Deadbeat hero", comedian.getId());
+        specialDao.add(special);
+        Special special2 = new Special("No place like home", comedian.getId());
+        specialDao.add(special2);
+        assertEquals(2, specialDao.findByComedian(comedian.getId()).size());
+        assertEquals(special, specialDao.findByComedian(comedian.getId()).get(0));
     }
 }

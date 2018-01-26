@@ -1,6 +1,8 @@
 package dao;
 
+import models.Comedian;
 import models.Review;
+import models.Special;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -80,6 +82,19 @@ public class Sql2oReviewDaoTest {
         reviewDao.add(review2);
         reviewDao.deleteAll();
         assertEquals(0, reviewDao.getAll().size());
+    }
+
+    @Test
+    public void findBySpecial() {
+        Comedian comedian = new Comedian("Doug Stanhope");
+        Special special = new Special("Deadbeat hero", comedian.getId());
+        Review review1 = new Review("Doug's work", 3,  "has it's moments", "mike", special.getId());
+        reviewDao.add(review1);
+        Review review2 = new Review("Doug's old stuff", 5,  "great and nostalgic", "jake", special.getId());
+        reviewDao.add(review2);
+        assertEquals(2, reviewDao.findBySpecial(special.getId()).size());
+        assertEquals(review1, reviewDao.findBySpecial(special.getId()).get(0));
+        assertEquals(review2, reviewDao.findBySpecial(special.getId()).get(1));
     }
 
 }

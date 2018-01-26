@@ -16,8 +16,9 @@ public class Sql2oSpecialDao implements SpecialDao{
     }
 
     //create
+    @Override
     public void add(Special special) {
-        String sql = "INSERT INTO specials (name, year, comicId, country, language, description) VALUES (:name, :year, :comicId, :country, :language, :description)";
+        String sql = "INSERT INTO specials (name, year, comedianId, country, language, description) VALUES (:name, :year, :comedianId, :country, :language, :description)";
         try (Connection con = sql2o.open()) {
             int id = (int) con.createQuery(sql)
                     .bind(special)
@@ -30,6 +31,7 @@ public class Sql2oSpecialDao implements SpecialDao{
     }
 
     //read
+    @Override
     public Special findById(int id) {
         String sql = "SELECT * FROM specials WHERE id = :id";
         try (Connection con = sql2o.open()) {
@@ -38,6 +40,7 @@ public class Sql2oSpecialDao implements SpecialDao{
                     .executeAndFetchFirst(Special.class);
         }
     }
+    @Override
     public List<Special> getAll() {
         String sql = "SELECT * FROM specials";
         try (Connection con = sql2o.open()) {
@@ -46,15 +49,25 @@ public class Sql2oSpecialDao implements SpecialDao{
         }
     }
 
+    public List<Special> findByComedian(int comedianId){
+        String sql = "SELECT * FROM specials WHERE comedianId = :comedianId";
+        try (Connection con = sql2o.open()) {
+            return con.createQuery(sql)
+                    .addParameter("comedianId", comedianId)
+                    .executeAndFetch(Special.class);
+        }
+    }
+
     //update
-    public void update(int id, String name, int year, int comicId, String country, String language, String description) {
-        String sql = "UPDATE specials SET name = :name, year = :year, comicId = :comicId, country = :country, language = :language, description = :description WHERE id = :id";
+    @Override
+    public void update(int id, String name, int year, int comedianId, String country, String language, String description) {
+        String sql = "UPDATE specials SET name = :name, year = :year, comedianId = :comedianId, country = :country, language = :language, description = :description WHERE id = :id";
         try (Connection con = sql2o.open()) {
             con.createQuery(sql)
                     .addParameter("id", id)
                     .addParameter("name", name)
                     .addParameter("year", year)
-                    .addParameter("comicId", comicId)
+                    .addParameter("comedianId", comedianId)
                     .addParameter("country", country)
                     .addParameter("language", language)
                     .addParameter("description", description)
@@ -65,6 +78,7 @@ public class Sql2oSpecialDao implements SpecialDao{
     }
 
     //delete
+    @Override
     public void deleteById(int id) {
         String sql = "DELETE FROM specials WHERE id = :id";
         try (Connection con = sql2o.open()) {
@@ -75,6 +89,8 @@ public class Sql2oSpecialDao implements SpecialDao{
             System.out.println(ex);
         }
     }
+
+    @Override
     public void deleteAll() {
         String sql = "DELETE FROM specials";
         try (Connection con = sql2o.open()) {
