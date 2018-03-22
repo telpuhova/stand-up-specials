@@ -1,12 +1,12 @@
-# _stand-up-specials_
+# stand-up-specials
 
-#### _Web API, that lets your applications fetch data from the database, 1/26/2018_
+Web API, that lets your applications fetch data from the database, 1/26/2018
 
-#### By _**telpuhova**_
+**By Natalia Telpukhova**
 
 ## Description
 
-_Based on simple REST principles, this API returns data in JSON format about standup comics, their specials, and other people's reviews on them._
+Based on simple REST principles, this API returns data in JSON format about standup comics, their specials, and other people's reviews on them.
 
 ### Endpoint Reference
 | METHOD | ENDPOINT | USAGE | RETURNS |
@@ -57,11 +57,11 @@ _Based on simple REST principles, this API returns data in JSON format about sta
 
 ## Setup
 
-* _clone repository_
-* _run App.java_
+* clone repository
+* run App.java
 
 ## Technologies Used
 
-_Java, Spark, Postgres, H2_
+Java, Spark, Postgres, H2
 
-Copyright (c) 2017 **_telpuhova_**
+Copyright (c) 2018 Natalia Telpukhova
